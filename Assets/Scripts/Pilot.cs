@@ -12,38 +12,17 @@ public class Pilot : MonoBehaviour
 
     void FixedUpdate()
     {
-        // rigidbody.AddForce(Physics.gravity * -1);
+        rigidbody.AddForce(Physics.gravity * -1);
         bool rotationalInput = false;
 
-        if (Input.GetKey("up"))
-        {
-            rigidbody.AddForce(transform.up * 20);
-        }
+        rigidbody.AddForce(transform.up * 15 * Input.GetAxis("Vertical"));
+        rigidbody.AddTorque(new Vector3(1, 0, 0) * -0.05f * Input.GetAxis("RotationX"));
+        rigidbody.AddTorque(new Vector3(0, 0, 1) * 0.05f * Input.GetAxis("RotationZ"));
 
-        if (Input.GetKey("w"))
-        {
-            rotationalInput = true;
-            rigidbody.AddTorque(new Vector3(1, 0, 0) * 0.1f);
-        }
-
-        if (Input.GetKey("s"))
+        if (Math.Abs(Input.GetAxis("RotationX")) > 0.01f || Math.Abs(Input.GetAxis("RotationZ")) > 0.01f)
         {
             rotationalInput = true;
-            rigidbody.AddTorque(new Vector3(1, 0, 0) * -1 * 0.1f);
         }
-
-        if (Input.GetKey("a"))
-        {
-            rotationalInput = true;
-            rigidbody.AddTorque(new Vector3(0, 0, 1) * 0.1f);
-        }
-
-        if (Input.GetKey("d"))
-        {
-            rotationalInput = true;
-            rigidbody.AddTorque(new Vector3(0, 0, 1) * -1 * 0.1f);
-        }
-
 
         // Counteract rotations.
         if (!rotationalInput && (Math.Abs(transform.up.x) > 0.01f || Math.Abs(transform.up.y) < 0.99f || Math.Abs(transform.up.z) > 0.01f))
@@ -72,8 +51,6 @@ public class Pilot : MonoBehaviour
 
             if (torque.magnitude > 0)
             {
-                Debug.Log("Adding torque");
-                Debug.Log(torque);
                 rigidbody.AddTorque(torque);
             }
         }
