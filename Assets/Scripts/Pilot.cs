@@ -16,8 +16,8 @@ public class Pilot : MonoBehaviour
         bool rotationalInput = false;
 
         rigidbody.AddForce(transform.up * 15 * Input.GetAxis("Vertical"));
-        rigidbody.AddTorque(new Vector3(1, 0, 0) * -0.05f * Input.GetAxis("RotationX"));
-        rigidbody.AddTorque(new Vector3(0, 0, 1) * 0.05f * Input.GetAxis("RotationZ"));
+        rigidbody.AddRelativeTorque(new Vector3(1, 0, 0) * -0.05f * Input.GetAxis("RotationX"));
+        rigidbody.AddRelativeTorque(new Vector3(0, 0, 1) * 0.05f * Input.GetAxis("RotationZ"));
 
         if (Math.Abs(Input.GetAxis("RotationX")) > 0.01f || Math.Abs(Input.GetAxis("RotationZ")) > 0.01f)
         {
