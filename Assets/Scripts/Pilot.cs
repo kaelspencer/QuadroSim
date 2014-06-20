@@ -13,7 +13,7 @@ public class Pilot : MonoBehaviour
 
     void FixedUpdate()
     {
-        //rigidbody.AddForce(Physics.gravity * -1);
+        rigidbody.AddForce(Physics.gravity * -1);
         rigidbody.AddForce(transform.up * 20 * Input.GetAxis("Vertical"));
     }
 }
